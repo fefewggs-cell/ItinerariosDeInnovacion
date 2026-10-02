@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mapeo · Experiencia en cliente</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f1f7ee;--card:#fff;--ink:#23402f;--mut:#6b8473;--pri:#6fae7e;--pri2:#4f9362;--line:#b9d3bf;--soft:#e2efdf}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17241c;--card:#20322a;--ink:#e3f1e6;--mut:#9bb5a3;--pri:#6fae7e;--pri2:#8fcfa0;--line:#3d5a49;--soft:#2a4034}}
+:root[data-theme="dark"]{--bg:#17241c;--card:#20322a;--ink:#e3f1e6;--mut:#9bb5a3;--pri:#6fae7e;--pri2:#8fcfa0;--line:#3d5a49;--soft:#2a4034}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Inter","Helvetica Neue",Arial,sans-serif;line-height:1.4}
+h1,h2,h3{font-weight:800;margin:0}
+button{font:inherit;cursor:pointer;border:0;border-radius:10px;padding:8px 14px;background:var(--pri);color:#fff;font-weight:600}
+button.g{background:var(--soft);color:var(--ink)}button:hover{filter:brightness(.95)}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:7px 9px}
+header{display:flex;gap:12px;align-items:center;padding:10px 18px;background:var(--card);border-bottom:1px solid var(--line);flex-wrap:wrap}
+header b{font-size:18px;font-weight:800;cursor:pointer}.sp{flex:1}
+#peers span{display:inline-block;width:26px;height:26px;border-radius:50%;background:var(--pri);color:#fff;font-size:12px;text-align:center;line-height:26px;margin-left:-6px;border:2px solid var(--card)}
+.wrap{display:flex;gap:14px;padding:14px;align-items:flex-start}
+main{flex:1;min-width:0}
+.home{text-align:center;padding:60px 16px}.home h1{font-size:34px}.home p{color:var(--mut)}
+.big{font-size:20px;padding:18px 34px;margin:8px}
+.menu{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;margin-top:24px;text-align:left}
+.menu h3{font-size:12px;letter-spacing:.12em;color:var(--pri2);margin:14px 0 6px}
+.menu a{display:block;padding:6px 0;border-bottom:2px solid var(--ink);margin-bottom:8px;cursor:pointer;font-weight:600;min-width:210px}
+.bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.bar h2{font-size:24px;margin-right:auto}
+.scr{overflow-x:auto;border-radius:14px}
+.board{position:relative;min-width:820px;aspect-ratio:2/1;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;touch-action:none}
+.z{position:absolute;border:1.5px dashed var(--line);border-radius:12px;padding:6px 10px;pointer-events:none}
+.z.o{border-radius:50%;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.z.d{background:var(--soft);border-style:solid}
+.z b{font-size:13px;font-weight:800;text-transform:uppercase;color:var(--mut);letter-spacing:.03em}.z small{display:block;color:var(--mut);font-size:10.5px}
+.zb{position:absolute;right:6px;bottom:6px;pointer-events:auto;padding:1px 8px;border-radius:50%;font-size:16px;line-height:20px}
+.ring{position:absolute;border:1.5px dotted var(--line);border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none}
+.n{position:absolute;width:13.5%;height:auto;min-width:112px;min-height:74px;border-radius:6px;box-shadow:0 2px 6px #0003;color:#20301f;z-index:2}
+.n .h{display:flex;gap:2px;padding:2px 3px;cursor:grab;background:#0000001a;border-radius:6px 6px 0 0;align-items:center}
+.n .h i{flex:1;font-size:10px;font-style:normal;opacity:.7;overflow:hidden;white-space:nowrap}
+.n .h span{cursor:pointer;font-size:12px;padding:0 3px}.n .sizeBtn{cursor:pointer!important;background:#fff8;border:1px solid #23402f66;color:#23402f!important;border-radius:4px;padding:0 5px!important;font-weight:900;line-height:16px;user-select:none;touch-action:manipulation}.n .sizeBtn:hover{background:#fff}.n .resizeBtn{cursor:nwse-resize!important;background:#23402f;color:#fff!important;border-radius:4px;padding:1px 5px!important;font-weight:800;line-height:16px;touch-action:none;user-select:none}
+.n textarea{width:100%;min-height:62px;border:0;background:transparent;resize:none;font-size:12px;text-align:center;color:inherit;padding:5px}
+.n.sel{outline:3px solid #2f6f4a}
+.n a{font-size:10px;display:block;padding:0 6px 4px;color:#1d4a7a}.n .rs{position:absolute;right:0;bottom:0;width:24px;height:24px;cursor:nwse-resize;opacity:.75;background:linear-gradient(135deg,transparent 0 42%,#23402f 43% 50%,transparent 51% 63%,#23402f 64% 71%,transparent 72%);border-radius:0 0 6px 0;z-index:10;touch-action:none}.n .rs:hover{opacity:1}.n.resizing{user-select:none;box-shadow:0 0 0 2px var(--pri),0 3px 8px #0003}
+svg.l{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.lt{position:absolute;z-index:3;transform:translate(-50%,-50%);background:var(--card);color:var(--ink);border:1px solid var(--pri);border-radius:10px;font-size:11px;padding:1px 7px;cursor:pointer}
+.side{width:300px;background:var(--card);border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;height:560px;position:sticky;top:10px}
+.side h3{padding:10px 14px;border-bottom:1px solid var(--line);font-size:15px}
+#msgs{flex:1;overflow:auto;padding:10px;font-size:13px}#msgs p{margin:0 0 8px;background:var(--soft);padding:6px 9px;border-radius:10px}#msgs b{display:block;font-size:11px;color:var(--pri2)}
+.side form,.side .row{display:flex;gap:6px;padding:8px}.side input{flex:1;min-width:0}
+.stk{max-width:640px}.stk .r{display:flex;gap:8px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-bottom:6px}
+.dot{width:14px;height:14px;border-radius:50%}
+.ok{background:var(--soft);padding:6px 12px;border-radius:10px;font-size:13px}
+body.focus header,body.focus .side,body.focus .bar,body.focus #saved{display:none!important}body.focus .wrap{padding:0}body.focus .board{min-width:0;aspect-ratio:auto;height:100vh;border-radius:0;border:0}body.focus .scr{border-radius:0;overflow:auto}body.focus #xf{display:block}
+#xf{display:none;position:fixed;top:8px;right:8px;z-index:50;opacity:.35}#xf:hover{opacity:1}
+body.nochat .side{display:none}.ib{display:inline-flex;align-items:center;padding:6px 8px}.side h3{display:flex;align-items:center;justify-content:space-between}
+.hide{display:none!important}
+@media(max-width:900px){.wrap{flex-direction:column}.side{width:100%;height:340px;position:static}}
+</style></head><body>
+<header><button class="g ib" id="tc" onclick="toggleChat()" title="Mostrar/ocultar chat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M15 4v16"/></svg></button><b onclick="go('')">🌿 Do·Think Mapeo</b><span id="crumb" style="color:var(--mut)"></span><span class="sp"></span><span id="sync" class="ok">Conectando…</span><span id="peers"></span><button class="g" onclick="focusMode()" title="Pantalla completa (F11)">⛶ Solo canvas</button></header><button id="xf" onclick="focusMode()">✕ Salir (Esc)</button>
+<div class="wrap"><main id="main"></main>
+<aside class="side"><h3>💬 Chat del equipo<button class="g ib" onclick="toggleChat()" title="Ocultar chat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M15 4v16"/></svg></button></h3><div id="msgs"></div><div class="row"><input id="ci" placeholder="Escribe un aporte…"><button onclick="sendMsg()">Enviar</button></div></aside></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+/* === CONFIGURA AQUÍ TU PROYECTO SUPABASE (Settings → API) === */
+const SUPABASE_URL="https://vcdobfhunnkwqoyoeiqh.supabase.co",SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZjZG9iZmh1bm5rd3FveW9laXFoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA5NTMyMzksImV4cCI6MjEwNjUyOTIzOX0._lPcubYS6OBobJd2RMNe1okp8eaVUoAcKTE5h9rLrlg";
+const COL=["#cfe8c4","#f6e7a1","#f3b5a8","#a9d9d6","#dfeaa0"];
+const ST={players:["Players","#f4a9b8"],partners:["Partners","#f8c58f"],viewers:["Viewers","#b5dfa3"]};
+const Z=(l,x,y,w,h,k,hint)=>({l,x,y,w,h,k:k||"",hint:hint||""});
+const T={
+analogos:{t:"Análogos – Antílogos",g:"Mapear · Compañía",z:[Z("…Ser como?",0,0,50,100,"","Empresas o personas a las que te gustaría parecerte"),Z("…No ser como?",50,0,50,100,"","Empresas o personas a las que NO querrías parecerte"),Z("¿Te gustaría…",38,36,24,26,"o d")]},
+stake:{t:"Stakeholders Map",g:"Mapear · Cliente / Mercado",ring:1,z:[Z("Actor principal",42,40,16,20,"o d")]},
+persona:{t:"Persona",g:"Mapear · Cliente / Mercado",z:[Z("Características demográficas / comunidad",0,0,45,48,"","Edad, familia, trabajo, nivel cultural, en quién confía"),Z("Momento / escenario",0,52,45,48,"","¿Dónde situamos a la persona?"),Z("Necesidades / motivaciones",55,0,45,100,"","Necesidades y motivaciones en el escenario descrito"),Z("Persona",39,30,22,40,"o d","Nombre · ¿es el usuario típico?")]},
+journey:{t:"Customer Journey Map",g:"Mapear · Cliente / Mercado",z:[Z("Antes",13,0,29,100,"d"),Z("Durante",43,0,29,100,"d"),Z("Después",73,0,27,100,"d"),Z("Acciones del usuario",0,7,100,14),Z("Puntos de contacto",0,23,100,14),Z("¿Qué pasa? ¿Qué siente?",0,39,100,38),Z("😊 / 😞 Emociones",0,79,100,21)]},
+entrevista:{t:"Entrevista cualitativa",g:"Explorar · Investigación",z:[Z("Entrevista",0,0,30,62,"","1) Objetivos 2) Tema 3) Preguntas a realizar"),Z("Usuario / cliente",0,66,30,34,"","Nombre, edad, profesión, nivel cultural, relación con el tema"),Z("¿Qué has descubierto que no supieras?",32,0,34,48),Z("¿Qué crees que te faltó por descubrir?",68,0,32,48),Z("¿Qué te ha impactado?",32,52,34,48),Z("¿Dónde te gustaría profundizar? ¿Qué dudas quedan?",68,52,32,48)]},
+misterioso:{t:"Cliente misterioso",g:"Explorar · Investigación",z:[Z("Tu personaje",0,0,34,32,"","¿Quién eres? Define tu personaje"),Z("La escena / situación",0,34,34,32,"","¿Dónde ocurre la acción?"),Z("Objetivo",0,68,34,32,"","¿Qué quieres comprender y aprender?"),Z("¿Qué esperabas que pasara y no pasó?",36,0,64,32),Z("¿Qué has descubierto que no sabías?",36,34,64,32),Z("¿Cómo te has sentido? ¿Por qué?",36,68,64,32)]},
+empatia:{t:"Mapa de empatía",g:"Explorar · Síntesis",z:[Z("Piensa",0,0,49,32),Z("Dice",51,0,49,32),Z("Siente",0,34,49,32),Z("Hace",51,34,49,32),Z("Oye",0,68,49,32),Z("Ve",51,68,49,32)]},
+desafio:{t:"Desafío de diseño",g:"Explorar · Síntesis",z:[Z("¿Cómo podría…",0,28,20,44,"o d"),Z("Necesidad",22,0,78,18),Z("Dolor",22,22,38,54),Z("Ganancia",66,22,30,54,"o"),Z("Desafío",22,82,78,18)]}
+};
+const MENU={Mapear:{"Compañía":["analogos"],"Cliente / Mercado":["stake","persona","journey"]},Explorar:{"Investigación":["entrevista","misterioso"],"Síntesis":["empatia","desafio"]}};
+let db,user,me={name:"Invitado",id:"x"},assets,room,cur=null,notes={},links={},unsubs=[],sel=null,tab="lista",linkMode=false,pend=[];
+const $=s=>document.querySelector(s),uid=()=>Math.random().toString(36).slice(2,10);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const safe=async(f)=>{try{return await f()}catch(e){console.warn(e);$("#sync").textContent="⚠ Sin sincronizar: "+(e.message||e.code)}};
+
+let sb;
+function sub(c,load){const L=async()=>{try{await load()}catch(e){console.warn(e)}};L();let ch;try{ch=sb.channel("r-"+c+"-"+uid()).on("postgres_changes",{event:"*",schema:"public",table:"items",filter:"col=eq."+c},L).subscribe()}catch(e){console.warn(e)}return()=>{try{ch&&sb.removeChannel(ch)}catch(e){}}}
+function mkDb(){const ok=r=>{if(r.error)throw r.error};
+ return{collection:c=>({
+  doc:id=>({
+   set:async d=>ok(await sb.from("items").upsert({col:c,id,data:d})),
+   update:async p=>ok(await sb.rpc("merge_item",{p_col:c,p_id:id,p_patch:p})),
+   delete:async()=>ok(await sb.from("items").delete().match({col:c,id})),
+   onSnapshot:cb=>sub(c,async()=>{const{data}=await sb.from("items").select("data").match({col:c,id});cb({data:()=>data&&data[0]?data[0].data:undefined})})}),
+  onSnapshot:cb=>sub(c,async()=>{const{data}=await sb.from("items").select("id,data").eq("col",c);cb({docs:(data||[]).map(r=>({id:r.id,data:()=>r.data}))})})})}}
+async function init(){try{await init2()}catch(e){console.error(e);var q=document.querySelector("#sync");if(q)q.textContent="⚠ "+(e.message||e)}finally{try{go((location.hash||"").slice(1))}catch(e){go("")}}}
+async function init2(){
+  let nm="";try{nm=localStorage.getItem("nm")||""}catch(e){}
+  if(!nm){nm=(prompt("¿Cómo te llamas? (lo verá tu equipo)")||"").trim()||"Invitado-"+uid().slice(0,3);try{localStorage.setItem("nm",nm)}catch(e){}}
+  me={name:nm,id:nm};
+  const cfg=SUPABASE_URL.startsWith("https://")&&!SUPABASE_URL.includes("TU-PROYECTO");
+  if(cfg&&window.supabase){sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);db=mkDb();$("#sync").textContent="● Sincronizado en vivo (Supabase)";
+    const pc=sb.channel("presence",{config:{presence:{key:uid()}}});
+    pc.on("presence",{event:"sync"},()=>{const a=Object.values(pc.presenceState()).flat();$("#peers").innerHTML=a.slice(0,8).map(x=>`<span title="${esc(x.name)}">${esc((x.name||"?")[0].toUpperCase())}</span>`).join("")}).subscribe(st=>{if(st==="SUBSCRIBED")pc.track({name:me.name})});
+    sub("chat",async()=>{const{data}=await sb.from("items").select("data").eq("col","chat");const d=(data||[]).map(x=>x.data).sort((a,b)=>a.at-b.at).slice(-100);$("#msgs").innerHTML=d.map(m=>`<p><b>${esc(m.by)}</b>${esc(m.t)}</p>`).join("");$("#msgs").scrollTop=1e9})}
+  else $("#sync").textContent="⚠ Modo local: configura SUPABASE_URL y SUPABASE_KEY";
+  $("#ci").addEventListener("keydown",e=>e.key==="Enter"&&sendMsg());
+  document.addEventListener("keydown",e=>{if(e.key==="F11"){e.preventDefault();focusMode()}else if(e.key==="Escape"&&document.body.classList.contains("focus"))focusMode()});
+  document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement)document.body.classList.remove("focus")});
+  try{if(localStorage.getItem("nochat"))document.body.classList.add("nochat")}catch(e){}
+}
+function toggleChat(){const on=document.body.classList.toggle("nochat");try{localStorage.setItem("nochat",on?"1":"")}catch(e){}}
+function focusMode(){const b=document.body,on=!b.classList.contains("focus");b.classList.toggle("focus",on);
+  try{if(on)document.documentElement.requestFullscreen?.();else if(document.fullscreenElement)document.exitFullscreen()}catch(e){}}
+function sendMsg(){const t=$("#ci").value.trim();if(!t||!db)return;$("#ci").value="";safe(()=>db.collection("chat").doc(uid()).set({t,by:me.name||"Anónimo",at:Date.now()}))}
+function go(h){try{location.hash=h}catch(e){}unsubs.forEach(u=>u());unsubs=[];cur=null;sel=null;pend=[];linkMode=false;
+  const m=$("#main");$("#crumb").textContent="";
+  if(!h){m.innerHTML=`<div class="home"><h1>Experiencia en cliente</h1><p>Herramientas de mapeo colaborativas para tu equipo</p><button class="big" onclick="go('exp')">Experiencia</button></div>`;return}
+  if(h==="exp"){m.innerHTML=`<div class="home"><h1>Experiencia</h1><p>Elige una fase</p><button class="big" style="background:#e07a6b" onclick="go('m-Mapear')">Mapear</button><button class="big" onclick="go('m-Explorar')">Explorar</button></div>`;return}
+  if(h.startsWith("m-")){const k=h.slice(2);m.innerHTML=`<div class="home"><h1>${k}</h1><div class="menu">${Object.entries(MENU[k]).map(([g,a])=>`<div><h3>${g.toUpperCase()}</h3>${a.map(i=>`<a onclick="go('${i}')">${T[i].t}</a>`).join("")}</div>`).join("")}</div><br><button class="g" onclick="go('exp')">← Volver</button></div>`;return}
+  if(T[h])openTool(h)}
+function openTool(id){cur=id;const t=T[id];tab=(id==="stake")?"lista":"mapa";notes={};links={};
+  $("#crumb").textContent="/ "+t.g;
+  shell();draw();
+  if(db)try{unsubs.push(db.collection("n-"+id).onSnapshot(s=>{notes={};s.docs.forEach(d=>notes[d.id]=d.data());draw()}));
+    unsubs.push(db.collection("l-"+id).onSnapshot(s=>{links={};s.docs.forEach(d=>links[d.id]=d.data());drawLinks()}));
+    unsubs.push(db.collection("meta").doc(id).onSnapshot(s=>{const d=s.data();const e=$("#saved");if(e)e.textContent=d&&d.saved?`✔ Guardado por ${d.by} · ${new Date(d.at).toLocaleString()}`:""}))}catch(e){console.warn(e)}}
+function shell(){const t=T[cur];$("#main").innerHTML=`<div class="bar"><button class="g" onclick="go('m-${t.g.startsWith('Mapear')?'Mapear':'Explorar'}')">←</button><h2>${t.t}</h2>
+  ${cur==="stake"?`<button class="g" onclick="tab='lista';shell();draw()">Lista</button><button onclick="tab='mapa';shell();draw()">Mapear</button>`:""}
+  <button class="g" id="lk" onclick="toggleLink()">🔗 Relacionar</button><button onclick="addNote()">+ Post-it</button><button style="background:#2f6f4a" onclick="saveShare()">💾 Guardar y compartir con profesor</button></div>
+  <div class="bar" id="lb"></div><div class="ok" id="saved" style="margin-bottom:8px;display:inline-block"></div>
+  <div id="body"></div>`}
+function draw(){if(!cur)return;const b=$("#body");if(!b)return;
+  if(cur==="stake"&&tab==="lista"){
+    const rows=Object.entries(notes).map(([k,n])=>`<div class="r"><span class="dot" style="background:${(ST[n.s]||ST.viewers)[1]}"></span><span style="flex:1">${esc(n.t)||"<i>(sin nombre)</i>"}</span><small style="color:var(--mut)">${(ST[n.s]||ST.viewers)[0]}</small><button class="g" onclick="delNote('${k}')">✕</button></div>`).join("");
+    b.innerHTML=`<div class="stk"><p style="color:var(--mut)">Lista de stakeholders: <b style="color:#d4607a">Players</b> (activos), <b style="color:#d9892b">Partners</b> (segundo grado), <b style="color:#4f9362">Viewers</b> (observan). Luego pulsa <b>Mapear</b>.</p>
+    <form class="r" onsubmit="addStake(event)"><input id="sn" placeholder="Nuevo stakeholder" style="flex:1" required><select id="ss"><option value="players">Player</option><option value="partners">Partner</option><option value="viewers">Viewer</option></select><button>Añadir</button></form>${rows}</div>`;return}
+  const t=T[cur];let h=`<div class="scr"><div class="board" id="bd">`;
+  if(t.ring)h+=[24,50,76,96].map(p=>`<div class="ring" style="width:${p*.5}%;height:${p}%"></div>`).join("");
+  t.z.forEach((z,i)=>h+=`<div class="z ${z.k}" style="left:${z.x}%;top:${z.y}%;width:${z.w}%;height:${z.h}%"><b>${z.l}</b><small>${z.hint}</small>${z.k.includes("d")&&z.k.includes("o")?"":`<button class="zb" onclick="addNote(${i})">+</button>`}</div>`);
+  h+=`<svg class="l" id="sv" viewBox="0 0 100 100" preserveAspectRatio="none"></svg><div id="lt"></div><div id="nt"></div></div></div>`;
+  b.innerHTML=h;
+  $("#nt").innerHTML=Object.entries(notes).filter(n=>n[1].x!=null).map(([k,n])=>noteHTML(k,n)).join("");
+  drawLinks()}
+function noteHTML(k,n){const c=cur==="stake"?(ST[n.s]||ST.viewers)[1]:COL[n.c||0];
+  const w=n.w!=null?n.w:13.5,h=n.h!=null?n.h:12;
+  return `<div class="n ${sel===k?"sel":""}" data-k="${k}" style="left:${n.x}%;top:${n.y}%;width:${w}%;min-width:0;height:${h}%;background:${c}"><div class="h" onpointerdown="drag(event,'${k}')"><i>${esc(n.by||"")}</i><span onclick="cyc('${k}')" title="Color">🎨</span><span onclick="pick('${k}')" title="Relacionar">🔗</span><span onclick="attach('${k}')" title="Adjuntar">📎</span><span onclick="delNote('${k}')">✕</span><span class="sizeBtn" title="Reducir tamaño" onclick="sizeNote('${k}',-1);event.stopPropagation()">−</span><span class="sizeBtn" title="Aumentar tamaño" onclick="sizeNote('${k}',1);event.stopPropagation()">+</span><span class="resizeBtn" title="Arrastra para cambiar tamaño" onpointerdown="resizeStart(event,'${k}')">↘</span></div><textarea onchange="upd('${k}',this.value)" placeholder="Escribe…">${esc(n.t)}</textarea>${n.f?`<a href="${esc(n.f)}" target="_blank">📎 ${esc(n.fn||"archivo")}</a>`:""}<span class="rs" title="Arrastra para cambiar tamaño" onpointerdown="resizeStart(event,'${k}')">↘</span></div>`}
+function ref(k){return db.collection("n-"+cur).doc(k)}
+function addStake(e){e.preventDefault();const k=uid();notes[k]={t:$("#sn").value,s:$("#ss").value,x:null,y:null,by:me.name};safe(()=>ref(k).set(notes[k]));draw()}
+function addNote(i){const z=i==null?{x:30,y:30,w:20,h:20}:T[cur].z[i];const k=uid();
+  const n={t:"",c:Math.floor(Math.random()*5),x:+(z.x+3+Math.random()*Math.max(1,z.w-18)).toFixed(1),y:+(z.y+9+Math.random()*Math.max(1,z.h-26)).toFixed(1),w:13.5,h:12,by:me.name};
+  if(cur==="stake"){n.s="viewers"}
+  notes[k]=n;draw();if(db)safe(()=>ref(k).set(n))}
+function upd(k,t){notes[k].t=t;if(db)safe(()=>ref(k).update({t}))}
+function cyc(k){const n=notes[k];if(cur==="stake"){const o=Object.keys(ST);n.s=o[(o.indexOf(n.s||"viewers")+1)%3];safe(()=>ref(k).update({s:n.s}))}else{n.c=((n.c||0)+1)%5;safe(()=>ref(k).update({c:n.c}))}draw()}
+function delNote(k){delete notes[k];Object.entries(links).forEach(([id,l])=>{if(l.a===k||l.b===k)safe(()=>db.collection("l-"+cur).doc(id).delete())});safe(()=>ref(k).delete());draw()}
+function drag(e,k){if(e.target.tagName==="SPAN"||e.target.classList.contains("rs"))return;const bd=$("#bd"),el=e.currentTarget.parentElement,r=bd.getBoundingClientRect();
+  const w=(notes[k].w!=null?notes[k].w:13.5),h=(notes[k].h!=null?notes[k].h:12);
+  const ox=e.clientX-el.offsetLeft,oy=e.clientY-el.offsetTop;el.setPointerCapture?.(e.pointerId);e.currentTarget.setPointerCapture(e.pointerId);
+  const mv=ev=>{const maxX=Math.max(0,100-w),maxY=Math.max(0,100-h);const x=Math.max(0,Math.min(maxX,(ev.clientX-ox)/r.width*100)),y=Math.max(0,Math.min(maxY,(ev.clientY-oy)/r.height*100));el.style.left=x+"%";el.style.top=y+"%";notes[k].x=+x.toFixed(1);notes[k].y=+y.toFixed(1);drawLinks()};
+  const up=()=>{window.removeEventListener("pointermove",mv);window.removeEventListener("pointerup",up);safe(()=>ref(k).update({x:notes[k].x,y:notes[k].y}))};
+  window.addEventListener("pointermove",mv);window.addEventListener("pointerup",up)}
+function sizeNote(k,delta){
+  const n=notes[k]; if(!n)return;
+  const step=2, min=8, maxW=Math.max(min,100-(n.x||0)), maxH=Math.max(min,100-(n.y||0));
+  const oldW=n.w!=null?n.w:13.5, oldH=n.h!=null?n.h:12;
+  n.w=+Math.min(maxW,Math.max(min,oldW+delta*step)).toFixed(1);
+  n.h=+Math.min(maxH,Math.max(min,oldH+delta*step)).toFixed(1);
+  const el=document.querySelector(`.n[data-k="${k}"]`);
+  if(el){el.style.width=n.w+'%';el.style.height=n.h+'%';el.classList.add('resizing');setTimeout(()=>el.classList.remove('resizing'),180)}
+  drawLinks();
+  if(db)safe(()=>ref(k).update({w:n.w,h:n.h}));
+}
+function resizeStart(e,k){
+  e.preventDefault();e.stopPropagation();
+  const el=e.currentTarget.closest('.n'),bd=$("#bd"),r=bd.getBoundingClientRect(),n=notes[k];
+  const startX=e.clientX,startY=e.clientY,startW=n.w!=null?n.w:13.5,startH=n.h!=null?n.h:12;
+  el.classList.add('resizing');
+  const mv=ev=>{
+    ev.preventDefault();
+    const maxW=Math.max(8,100-(n.x||0)),maxH=Math.max(8,100-(n.y||0));
+    n.w=+Math.min(maxW,Math.max(8,startW+(ev.clientX-startX)/r.width*100)).toFixed(1);
+    n.h=+Math.min(maxH,Math.max(8,startH+(ev.clientY-startY)/r.height*100)).toFixed(1);
+    el.style.width=n.w+'%';el.style.height=n.h+'%';drawLinks();
+  };
+  const up=()=>{el.classList.remove('resizing');window.removeEventListener('pointermove',mv);window.removeEventListener('pointerup',up);if(db)safe(()=>ref(k).update({w:n.w,h:n.h}));};
+  window.addEventListener('pointermove',mv);window.addEventListener('pointerup',up);
+  try{e.currentTarget.setPointerCapture(e.pointerId)}catch(_){ }
+}
+function toggleLink(){linkMode=!linkMode;pend=[];$("#lk").style.background=linkMode?"var(--pri)":"";$("#lk").style.color=linkMode?"#fff":"";lbar()}
+function pick(k){if(!linkMode)toggleLink();if(!pend.includes(k))pend.push(k);pend=pend.slice(-2);sel=k;lbar()}
+function lbar(){const b=$("#lb");if(!b)return;b.innerHTML=linkMode?(pend.length<2?`<span class="ok">Pulsa 🔗 en dos post-its para relacionarlos (${pend.length}/2)</span>`:`<input id="ld" placeholder="Describe la relación"><button onclick="mkLink()">Crear relación</button>`):""}
+function mkLink(){const d=$("#ld").value||"relación";const id=uid();const l={a:pend[0],b:pend[1],d};links[id]=l;safe(()=>db.collection("l-"+cur).doc(id).set(l));toggleLink();drawLinks()}
+function drawLinks(){const sv=$("#sv"),lt=$("#lt");if(!sv)return;let s="",h="";
+  Object.entries(links).forEach(([id,l])=>{const a=notes[l.a],b=notes[l.b];if(!a||!b||a.x==null||b.x==null)return;
+    const x1=a.x+(a.w!=null?a.w/2:6.75),y1=a.y+(a.h!=null?a.h/2:6),x2=b.x+(b.w!=null?b.w/2:6.75),y2=b.y+(b.h!=null?b.h/2:6);s+=`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#2f6f4a" stroke-width=".35" stroke-dasharray="1 .6"/>`;
+    h+=`<div class="lt" style="left:${(x1+x2)/2}%;top:${(y1+y2)/2}%" title="Clic para eliminar" onclick="dl('${id}')">${esc(l.d)}</div>`});
+  sv.innerHTML=s;lt.innerHTML=h}
+function dl(id){delete links[id];safe(()=>db.collection("l-"+cur).doc(id).delete());drawLinks()}
+function attach(k){if(!sb)return alert("Configura Supabase para subir archivos.");
+  const i=document.createElement("input");i.type="file";i.onchange=async()=>{const f=i.files[0];if(!f)return;
+    const p=cur+"/"+uid()+"-"+f.name.replace(/[^\w.-]/g,"_");const r=await sb.storage.from("adjuntos").upload(p,f);
+    if(r.error)return alert("Error al subir: "+r.error.message);const u=sb.storage.from("adjuntos").getPublicUrl(p).data.publicUrl;
+    notes[k].f=u;notes[k].fn=f.name;safe(()=>ref(k).update({f:u,fn:f.name}));draw()};i.click()}
+function saveShare(){safe(()=>db.collection("meta").doc(cur).set({saved:true,by:me.name,at:Date.now()}))}
+init();
+</script></body></html>
